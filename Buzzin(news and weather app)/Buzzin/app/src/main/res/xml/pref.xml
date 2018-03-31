@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+   >
+<PreferenceCategory
+    android:title="News Providers">
+    <CheckBoxPreference
+        android:id="@+id/c0"
+
+        android:title="BBC News"
+        android:defaultValue="true"
+        app:key="p0"
+        android:summaryOff="Hide"
+        android:summaryOn="Show" />
+    <CheckBoxPreference
+        android:id="@+id/c1"
+        android:title="CNN"
+        android:defaultValue="true"
+        app:key="p1"
+        android:summaryOff="Hide"
+        android:summaryOn="Show" />
+    <CheckBoxPreference
+        android:id="@+id/c2"
+        android:title="ESPN"
+        android:defaultValue="true"
+        app:key="p2"
+        android:summaryOff="Hide"
+        android:summaryOn="Show" />
+    <CheckBoxPreference
+        android:id="@+id/c3"
+        android:title="Google News"
+android:defaultValue="true"
+        app:key="p3"
+        android:summaryOff="Hide"
+        android:summaryOn="Show" />
+    <CheckBoxPreference
+        android:id="@+id/c4"
+        android:title="The Times of India"
+        android:defaultValue="true"
+        app:key="p4"
+        android:summaryOff="Hide"
+        android:summaryOn="Show" />
+
+
+</PreferenceCategory>
+   <PreferenceCategory
+    android:title="Sort">
+    <ListPreference
+        android:key="Sort_P"
+
+        android:title="Sort By"
+        android:entries="@array/Sort"
+        android:entryValues="@array/Data"/>
+</PreferenceCategory>
+    <PreferenceCategory
+        android:title="Tempratur Unit">
+        <ListPreference
+            android:key="t_P"
+
+            android:title="Unit"
+            android:entries="@array/Unit"
+            android:entryValues="@array/Unitd"/>
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>
