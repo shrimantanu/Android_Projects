@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Rithala_Metro_Station">ChIJQYClEUwBDTkRfG8bX2aRc9I</string>
+    <string name="Rohini_west_Metro_Station">ChIJUeD361oBDTkR0GQSS7fxwQ8</string>
+    <string name="Rohini_east_Metro_Station">ChIJ63padGABDTkRvnE7qXmA1LA</string>
+
+
+    <string-array name="redlinepid">
+        <item>@string/Rithala_Metro_Station</item>
+        <item>@string/Rohini_west_Metro_Station</item>
+        <item>@string/Rohini_east_Metro_Station</item>
+    </string-array>
+</resources>
