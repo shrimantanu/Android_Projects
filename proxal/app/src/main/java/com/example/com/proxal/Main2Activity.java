@@ -57,6 +57,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,7 @@ public class Main2Activity extends AppCompatActivity implements
     private boolean mIsEnabled;
     private GoogleApiClient mClient;
     private Geofencing mGeofencing;
+    private Menu m;
 
     /**
      * Called when the activity is starting
@@ -266,20 +268,41 @@ public class Main2Activity extends AppCompatActivity implements
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-
+        String s = getIntent().getStringExtra("Uname");
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+        MenuItem bm = menu.findItem(R.id.username);
+        bm.setTitle(s);
+        this.m=menu;
         return true;
     }
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.settings) {
-            Intent in = new Intent(this, BlankFragment.class);
-            startActivity(in);
-            return true;
+        if (item.getItemId() == R.id.signout) {
+        //    Intent in = new Intent(this, BlankFragment.class);
+        //    startActivity(in);
+        //    return true;
+            FirebaseAuth.getInstance().signOut();
+            MenuItem bm = m.findItem(R.id.username);
+            bm.setTitle("Log In");
+            bm = m.findItem(R.id.signout);
+            bm.setVisible(false);
         }
+        if (item.getItemId() == R.id.username)
+        {
+            if(item.getTitle().equals("Log In"))
+            {
+                Intent in = new Intent(this, log.class);
+                startActivity(in);
+            }
 
-        return super.onOptionsItemSelected(item);
+        }
+        if (item.getItemId() == R.id.cont)
+        {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.linkedin.com/in/shaurya-singh-92b60b149/"));
+        startActivity(browserIntent);
+        }
+            return super.onOptionsItemSelected(item);
     }
 
     public void onRingerPermissionsClicked(View view) {

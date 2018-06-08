@@ -102,6 +102,7 @@ public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null)
         updateUI(currentUser);
     }
     private void createAccount(String email,String password) {
@@ -156,6 +157,7 @@ public void onStart() {
 
     private void updateUI(FirebaseUser user) {
         Intent intent = new Intent(log.this, com.example.com.proxal.Main2Activity.class);
+        intent.putExtra("Uname", user.getEmail());
         startActivity(intent);
 
 
