@@ -34,6 +34,10 @@ public class log extends AppCompatActivity {
         t2=findViewById(R.id.editText2);
         i1=findViewById(R.id.i1);
         i2=findViewById(R.id.i2);
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
+
         i1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

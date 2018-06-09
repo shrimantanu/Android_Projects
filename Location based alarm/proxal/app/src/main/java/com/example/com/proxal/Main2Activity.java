@@ -106,7 +106,9 @@ public class Main2Activity extends AppCompatActivity implements
                 editor.putBoolean(getString(R.string.setting_enabled), isChecked);
                 mIsEnabled = isChecked;
                 editor.commit();
-                if (isChecked) mGeofencing.registerAllGeofences();
+                if (isChecked)
+                {//if(getIntent().getBooleanExtra("EXIT", false)==false)
+                        mGeofencing.registerAllGeofences();}
                 else mGeofencing.unRegisterAllGeofences();
             }
 
