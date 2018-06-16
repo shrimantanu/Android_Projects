@@ -28,15 +28,20 @@
             android:exported="false" />
         <receiver android:name="com.example.com.proxal.GeofenceBroadcastReceiver" />
 
-        <activity android:name=".log">
+        <activity android:name=".log"
+                      >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".alarm"></activity>
+        <activity android:name=".Main2Activity"
+             />
+        <activity android:name=".alarm"
+
+            ></activity>
     </application>
 
 </manifest>

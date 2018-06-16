@@ -40,7 +40,7 @@ public class Geofencing implements ResultCallback {
     public static final String TAG = Geofencing.class.getSimpleName();
     private static final float GEOFENCE_RADIUS = 50; // 50 meters
     private static final long GEOFENCE_TIMEOUT = 24 * 60 * 60 * 1000; // 24 hours
-
+    private String plceidcur=new String("");
     private List<Geofence> mGeofenceList;
     private PendingIntent mGeofencePendingIntent;
     private GoogleApiClient mGoogleApiClient;

@@ -31,6 +31,7 @@ import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
 
 public class GeofenceBroadcastReceiver extends BroadcastReceiver {
+    public static String placeId;
 
     public static final String TAG = GeofenceBroadcastReceiver.class.getSimpleName();
 
@@ -46,6 +47,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         // Get the Geofence Event from the Intent sent through
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
+        placeId = geofencingEvent.getTriggeringGeofences().get(0).getRequestId();
         if (geofencingEvent.hasError()) {
             Log.e(TAG, String.format("Error code : %d", geofencingEvent.getErrorCode()));
             return;
@@ -58,13 +60,18 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
             setRingerMode(context, AudioManager.RINGER_MODE_SILENT);
         } else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
             setRingerMode(context, AudioManager.RINGER_MODE_NORMAL);
-        } else {
-            // Log the error.
-            Log.e(TAG, String.format("Unknown transition : %d", geofenceTransition));
-            // No need to do anything else
-            return;
-        }
-        // Send the notification
+        }/* else if(geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL) {
+
+            setRingerMode(context, AudioManager.RINGER_MODE_NORMAL);
+        }*/
+
+        else{
+                // Log the error.
+                Log.e(TAG, String.format("Unknown transition : %d", geofenceTransition));
+                // No need to do anything else
+                return;
+            }
+                // Send the notification
         sendNotification(context, geofenceTransition);
     }
 
@@ -112,8 +119,9 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
                     .setContentTitle(context.getString(R.string.back_to_normal));
         }
 */
+
       builder.setSmallIcon(R.drawable.ic_man_waking_up_on_morning_sitting_on_bed_stretching_his_arms).setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
-              R.drawable.ic_alarm_black_24dp)).setContentTitle(context.getString(R.string.back_to_normal));
+              R.drawable.ic_alarm_black_24dp)).setContentTitle("Destination Reached");
         // Continue building the notification
         builder.setContentText(context.getString(R.string.touch_to_relaunch));
         builder.setContentIntent(notificationPendingIntent);

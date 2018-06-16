@@ -72,9 +72,9 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
     public void swapPlaces(PlaceBuffer newPlaces){
         mPlaces = newPlaces;
         if (mPlaces != null) {
-            // Force the RecyclerView to refresh
+         // Force the RecyclerView to refresh
             this.notifyDataSetChanged();
-        }
+       }
     }
 
     /**
@@ -103,4 +103,9 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
         }
 
     }
+    public void remove(){
+
+    }
+
+
 }

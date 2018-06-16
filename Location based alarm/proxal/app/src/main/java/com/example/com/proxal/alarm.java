@@ -1,6 +1,8 @@
 package com.example.com.proxal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.com.proxal.provider.PlaceContentProvider;
+import com.example.com.proxal.provider.PlaceDbHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -23,14 +27,17 @@ public class alarm extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener {
     private TextView t0,t1,t2,t3;
     public static      int i=0;
+    private PlaceDbHelper mPlaceDbHelper;
     private Button b0;
     private GoogleApiClient mClient;
     private Geofencing mGeofencing;
-
+    private PlaceContentProvider f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_alarm);
+        mPlaceDbHelper=new PlaceDbHelper(this);
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.alarm1);
         mediaPlayer.start();
         t0=(TextView)findViewById(R.id.t0);
@@ -44,12 +51,18 @@ public class alarm extends AppCompatActivity implements
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, this)
                 .build();
-
+         //   f=new PlaceContentProvider();
+           // f.deleteall();
         mGeofencing = new Geofencing(this, mClient);
+
+
+
 b0=(Button)findViewById(R.id.b0);
 b0.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
+         SQLiteDatabase db = mPlaceDbHelper.getWritableDatabase();
+            db.execSQL("delete from places; ");
         mGeofencing.unRegisterAllGeofences();
         Intent intent = new Intent(getApplicationContext(), log.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -57,6 +70,7 @@ b0.setOnClickListener(new View.OnClickListener() {
         startActivity(intent);
         finish();
         mediaPlayer.stop();
+
     }
 });
         Timer timer=new Timer();

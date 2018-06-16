@@ -16,12 +16,14 @@ package com.example.com.proxal;
  * limitations under the License.
  */
 
+import android.app.ActionBar;
 import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -44,6 +46,7 @@ import com.example.com.proxal.Geofencing;
 import com.example.com.proxal.PlaceListAdapter;
 import com.example.com.proxal.R;
 import com.example.com.proxal.provider.PlaceContract;
+import com.example.com.proxal.provider.PlaceDbHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -65,7 +68,7 @@ import java.util.List;
 public class Main2Activity extends AppCompatActivity implements
         ConnectionCallbacks,
         OnConnectionFailedListener {
-
+    private PlaceDbHelper mPlaceDbHelper;
     // Constants
     public static final String TAG = Main2Activity.class.getSimpleName();
     private static final int PERMISSIONS_REQUEST_FINE_LOCATION = 111;
@@ -142,7 +145,7 @@ public class Main2Activity extends AppCompatActivity implements
 
     /***
      * Called when the Google API Client is suspended
-     *
+     *ding
      * @param cause cause The reason for the disconnection. Defined by constants CAUSE_*.
      */
     @Override
@@ -246,6 +249,7 @@ public class Main2Activity extends AppCompatActivity implements
     @Override
     public void onResume() {
         super.onResume();
+        mRecyclerView.setVisibility(View.VISIBLE);
 
         // Initialize location permissions checkbox
         CheckBox locationPermissions = (CheckBox) findViewById(R.id.location_permission_checkbox);
@@ -304,7 +308,18 @@ public class Main2Activity extends AppCompatActivity implements
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.linkedin.com/in/shaurya-singh-92b60b149/"));
         startActivity(browserIntent);
         }
-            return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.reset) {
+        //this.getContentResolver().delete();
+
+            mPlaceDbHelper=new PlaceDbHelper(this);
+            SQLiteDatabase db = mPlaceDbHelper.getWritableDatabase();
+            String s="delete from places; ";
+            db.execSQL(s);
+            refreshPlacesData();
+            mRecyclerView.setVisibility(View.INVISIBLE);
+
+
+        }   return super.onOptionsItemSelected(item);
     }
 
     public void onRingerPermissionsClicked(View view) {

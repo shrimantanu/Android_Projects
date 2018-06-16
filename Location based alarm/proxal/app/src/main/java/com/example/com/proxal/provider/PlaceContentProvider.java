@@ -179,11 +179,15 @@ public class PlaceContentProvider extends ContentProvider {
     /***
      * Updates a single row of data
      *
-     * @param uri
-     * @param selection
-     * @param selectionArgs
      * @return number of rows affected
      */
+    public int deleteall(){
+        final SQLiteDatabase db = mPlaceDbHelper.getWritableDatabase();
+        int placesUpdated;
+        placesUpdated=db.delete(PlaceEntry.TABLE_NAME,null,null);
+       // placesUpdated = db.update(PlaceEntry.TABLE_NAME, values, "_id=?", new String[]{id});
+        return 0;
+    }
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
