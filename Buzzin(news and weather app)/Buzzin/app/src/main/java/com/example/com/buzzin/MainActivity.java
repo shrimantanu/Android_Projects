@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         URL urlw=null;
         try{
             urlw=new URL("https://api.openweathermap.org/data/2.5/weather?id=1273294&APPID=d7ee051a0a293755dd3bef236370d39b ");
+            Log.e("URLS",""+urlw);
         }
         catch (Exception e){
             Log.e("wedreport",e.getMessage().toString());
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             URL url=null;
             try{
                 url=new URL("https://newsapi.org/v1/articles?source=BBC-news&sortBy="+sort+"&apiKey=963d8ab282ac4435825cc034a1b0e62b");
+            Log.e("URLS",""+urlw);
             }
             catch (Exception e){
                 Log.e("asdf",e.getMessage().toString());
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             new task(p1, MainActivity.this,"json0").execute(url);}
        // Log.e("asdfMAin","yanha tak2222");
         if(sp.getBoolean("p1",true)){
-
+`
             URL url=null;
             try{
                 url=new URL(" https://newsapi.org/v1/articles?source=cnn&sortBy="+sort+"&apiKey=963d8ab282ac4435825cc034a1b0e62b");
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         }
         catch(Exception e){
             Log.e("asdfMAin",e.getMessage());
+            e.printToBackStackTrace();
         }
     }
     public class task extends AsyncTask<URL, Void, JSONObject> {
